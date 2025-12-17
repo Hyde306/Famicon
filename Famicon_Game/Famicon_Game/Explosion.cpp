@@ -87,8 +87,8 @@ void UpdateExplosion(Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 
             explosions[y][x].timer--;
 
-            // アニメーション更新（速度調整）
-            if (++explosions[y][x].frameTimer >= 3)
+            // 速度調整
+            if (++explosions[y][x].frameTimer >= 1)
             {
                 explosions[y][x].frameTimer = 0;
                 explosions[y][x].currentFrame++;

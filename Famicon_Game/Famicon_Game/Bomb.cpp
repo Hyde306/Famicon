@@ -5,7 +5,7 @@ void InitBomb(Bomb& bomb)
 {
     bomb.active = false;
     bomb.timer = 0;
-    bomb.passThrough = false;// プレイヤーのすり抜け可能か
+    bomb.passThrough = false; // プレイヤーのすり抜け可能か
 }
 
 //  ボムのフレーム更新

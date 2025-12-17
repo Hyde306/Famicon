@@ -14,6 +14,7 @@ public:
     int timer = 0;
     int currentFrame = 0;
     int frameTimer = 0;
+    int isPlaced = 0;
     bool active = false;
     bool passThrough = false;
 

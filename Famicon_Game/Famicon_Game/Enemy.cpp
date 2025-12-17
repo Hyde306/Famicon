@@ -1,106 +1,147 @@
-﻿// Enemy.cpp
-#include "Enemy.h"
+﻿#include "Enemy.h"
 #include "DxLib.h"
 #include "2D_function.h"
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <list>
 
 extern Bomb bomb;
 
-int enemyImg; // スプライトシート1枚
+int enemyImg;
 static std::vector<std::unique_ptr<Base>> enemies;
 
 // 敵画像の初期化
 void InitEnemyGraphics() {
-    enemyImg = LoadGraph("image/Enemy1.png"); // 横に6フレーム並んでいる想定
+    enemyImg = LoadGraph("image/Enemy1.png");
 }
 
 // 敵生成
 void InitEnemies(int map[MAP_HEIGHT][MAP_WIDTH]) {
     enemies.clear();
-    auto c = std::make_unique<ChaseEnemy>();
-    c->Init(map);
-    enemies.push_back(std::move(c));
+    auto e = std::make_unique<ChaseEnemy>();
+    e->Init(map);
+    enemies.push_back(std::move(e));
 }
 
 // 敵更新
 void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],
     const Player& player,
     Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) {
+
     for (auto& e : enemies) {
-        auto* chase = dynamic_cast<ChaseEnemy*>(e.get());
-        if (chase) chase->Update(map, player, explosions);
+        auto* enemy = dynamic_cast<ChaseEnemy*>(e.get());
+        if (enemy) enemy->Update(map, player, explosions);
     }
 }
 
 // 敵描画
 void DrawEnemies(float scrollX) {
     for (auto& e : enemies) {
-        auto* chase = dynamic_cast<ChaseEnemy*>(e.get());
-        if (chase) chase->Draw(scrollX);
+        auto* enemy = dynamic_cast<ChaseEnemy*>(e.get());
+        if (enemy) enemy->Draw(scrollX);
     }
 }
 
 // ===== ChaseEnemy =====
+
 void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH]) {
-    pos.x = static_cast<float>(TILE_SIZE * 5);
-    pos.y = static_cast<float>(TILE_SIZE * 5);
-    vec.x = static_cast<float>(TILE_SIZE) / 10.0f;
-    vec.y = static_cast<float>(TILE_SIZE) / 10.0f;
+    pos.x = TILE_SIZE * 5.0f;
+    pos.y = TILE_SIZE * 5.0f;
+    vec.y = TILE_SIZE / 10.0f;
+    dirY = 1;          // 下方向
+    alive = true;
+    currentFrame = 0;
+    frameTimer = 0;
+    prevCenterY = pos.y + TILE_SIZE / 2.0f;
 }
 
 void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
-    const Player& player,
-    Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) {
+    const Player&,
+    Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
+{
     if (!alive) return;
 
-    // プレイヤー追跡
-    if (player.pos.x > pos.x) pos.x += vec.x;
-    else if (player.pos.x < pos.x) pos.x -= vec.x;
-    if (player.pos.y > pos.y) pos.y += vec.y;
-    else if (player.pos.y < pos.y) pos.y -= vec.y;
+    // 中心座標
+    float centerX = pos.x + TILE_SIZE / 2.0f;
+    float centerY = pos.y + TILE_SIZE / 2.0f;
+    int mapX = (int)(centerX / TILE_SIZE);
+    int mapY = (int)(centerY / TILE_SIZE);
 
-    // アニメーション更新
-    frameTimer++;
-    if (frameTimer % 10 == 0) {
-        currentFrame++;
-        if (currentFrame >= ENEMY_FRAMES) currentFrame = 0;
+    // 壁判定による上下反転
+    float tileCenterY = mapY * TILE_SIZE + TILE_SIZE / 2.0f;
+    if ((prevCenterY - tileCenterY) * (centerY - tileCenterY) <= 0.0f)
+    {
+        int nextMapY = mapY + dirY;
+
+        // 次のタイルが壁か爆弾なら反転
+        bool isWall = (nextMapY < 0 || nextMapY >= MAP_HEIGHT ||
+            map[nextMapY][mapX] == 1 || map[nextMapY][mapX] == 2);
+
+        bool isBomb = false;
+        if (bomb.isPlaced) {
+            int bombMapX = bomb.worldX / TILE_SIZE;
+            int bombMapY = bomb.worldY / TILE_SIZE;
+
+            if (bombMapX == mapX && bombMapY == nextMapY) {
+                isBomb = true;
+            }
+        }
+
+        if (isWall || isBomb) {
+            dirY = -dirY;
+        }
+
+        pos.y = tileCenterY - TILE_SIZE / 2.0f;
     }
+    prevCenterY = centerY;
+
+    // 移動量
+    float nextY = pos.y + vec.y * dirY;
+    pos.y = nextY;
+
+
 
     // 爆風判定
-    int mapX = static_cast<int>((pos.x + TILE_SIZE / 2) / TILE_SIZE);
-    int mapY = static_cast<int>((pos.y + TILE_SIZE / 2) / TILE_SIZE);
-    if (explosions[mapY][mapX].active) {
+    if (explosions[mapY][mapX].active)
+    {
         alive = false;
         deathFrame = 0;
     }
+
+    // アニメーション更新
+    frameTimer++;
+    if (frameTimer % 10 == 0)
+    {
+        currentFrame++;
+        if (currentFrame >= ENEMY_FRAMES) currentFrame = 0;
+    }
 }
 
-// Base::Draw() のオーバーライド
-void ChaseEnemy::Draw() {
-    if (!alive) return;
 
-    int frameWidth = 32; // 1フレームの幅
-    int frameHeight = 32; // 1フレームの高さ
-    int srcX = currentFrame * frameWidth;
-    int srcY = 0;
-
-    DrawRectGraph((int)pos.x, (int)pos.y,
-        srcX, srcY, frameWidth, frameHeight,
-        enemyImg, TRUE);
-}
-
+// 描画
 void ChaseEnemy::Draw(float scrollX) {
     if (!alive) return;
 
-    int frameWidth = 32;
-    int frameHeight = 32;
-    int srcX = currentFrame * frameWidth;
-    int srcY = 0;
+    int frameWidth = 64;
+    int frameHeight = 64;
 
-    DrawRectGraph((int)(pos.x - scrollX), (int)pos.y,
-        srcX, srcY, frameWidth, frameHeight,
-        enemyImg, TRUE);
+    DrawRectGraph(
+        (int)(pos.x - scrollX),
+        (int)pos.y,
+        currentFrame * frameWidth,
+        0,
+        frameWidth,
+        frameHeight,
+        enemyImg,
+        TRUE
+    );
 }
 
 int ChaseEnemy::Action(std::list<std::unique_ptr<Base>>&) {
     return 0;
+}
+
+void ChaseEnemy::Draw() {
+    Draw(0.0f);
 }

@@ -8,8 +8,7 @@
 #define ENEMY_FRAMES 6
 #define ENEMY_DEATH_FRAMES 4
 
-extern int enemyImgs[ENEMY_FRAMES + ENEMY_DEATH_FRAMES];
-extern const float MOVE_SPEED;
+extern int enemyImg;
 
 class ChaseEnemy : public Base {
 public:
@@ -18,19 +17,22 @@ public:
     bool alive = true;
     int currentFrame = 0;
     int deathFrame = 0;
-    int frameTimer;
+    int frameTimer = 0;
+
     void Init(int map[MAP_HEIGHT][MAP_WIDTH]);
     void Update(int map[MAP_HEIGHT][MAP_WIDTH],
         const Player& player,
         Explosion explosions[MAP_HEIGHT][MAP_WIDTH]);
 
-    // Base::Draw() をオーバーライド
-    void Draw() override;            // ← 引数なし版
-    void Draw(float scrollX);        // ← スクロール対応版（独自）
+    void Draw() override;
+    void Draw(float scrollX);
 
     int Action(std::list<std::unique_ptr<Base>>&) override;
-};
 
+private:
+    int dirY;
+    float prevCenterY;
+};
 
 // 管理系
 void InitEnemyGraphics();
