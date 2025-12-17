@@ -10,7 +10,8 @@
 
 extern int enemyImg;
 
-class ChaseEnemy : public Base {
+class ChaseEnemy : public Base
+{
 public:
     Position pos;
     Vec2 vec;

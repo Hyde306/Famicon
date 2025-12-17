@@ -75,22 +75,25 @@ void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
         int nextMapY = mapY + dirY;
 
         // 次のタイルが壁か爆弾なら反転
-        bool isWall = (nextMapY < 0 || nextMapY >= MAP_HEIGHT ||
-            map[nextMapY][mapX] == 1 || map[nextMapY][mapX] == 2);
+        bool isWall =
+            (nextMapY < 0 || nextMapY >= MAP_HEIGHT ||
+                map[nextMapY][mapX] == 1 ||
+                map[nextMapY][mapX] == 2);
 
         bool isBomb = false;
-        if (bomb.isPlaced) {
-            int bombMapX = bomb.worldX / TILE_SIZE;
-            int bombMapY = bomb.worldY / TILE_SIZE;
-
-            if (bombMapX == mapX && bombMapY == nextMapY) {
+        if (bomb.active)
+        {
+            if (bomb.mapX == mapX && bomb.mapY == nextMapY)
+            {
                 isBomb = true;
             }
         }
 
-        if (isWall || isBomb) {
+        if (isWall || isBomb)
+        {
             dirY = -dirY;
         }
+
 
         pos.y = tileCenterY - TILE_SIZE / 2.0f;
     }

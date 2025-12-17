@@ -1,19 +1,14 @@
 #pragma once
-#include "Scene_Manager.h"
+class CManager;
 
-class CManager;//シーン管理クラス
-
-//シーンベースクラス
-class CScene {
+class CScene 
+{
 protected:
-	CManager* manager{ nullptr };
+    CManager* manager{ nullptr };
 public:
-	CScene(CManager* pManager) { manager = pManager; };
+    CScene(CManager* pManager) : manager(pManager) {}
+    virtual ~CScene() {}
 
-	//更新処理
-	virtual int Update() { return 0; };
-	//描画処理
-	virtual void Draw() {};
-	//デストラクタ
-	virtual ~CScene() {};
+    virtual int Update() { return 0; }
+    virtual void Draw() {}
 };
