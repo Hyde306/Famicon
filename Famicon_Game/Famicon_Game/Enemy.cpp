@@ -54,6 +54,11 @@ void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH]) {
     currentFrame = 0;
     frameTimer = 0;
     prevCenterY = pos.y + TILE_SIZE / 2.0f;
+    alive = true;
+    dying = false;
+    deathFrame = 0;
+    deathTimer = 0;
+
 }
 
 void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
@@ -105,12 +110,15 @@ void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
 
 
 
-    // 爆風判定
     if (explosions[mapY][mapX].active)
     {
         alive = false;
+        dying = true;
         deathFrame = 0;
+        deathTimer = 0;
+        return;
     }
+
 
     // アニメーション更新
     frameTimer++;

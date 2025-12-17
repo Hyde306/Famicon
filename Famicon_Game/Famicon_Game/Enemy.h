@@ -17,8 +17,10 @@ public:
     Vec2 vec;
     bool alive = true;
     int currentFrame = 0;
-    int deathFrame = 0;
     int frameTimer = 0;
+    bool dying;        // 死亡アニメ中か
+    int  deathFrame;   // 死亡アニメのコマ
+    int  deathTimer;   // フレーム管理
 
     void Init(int map[MAP_HEIGHT][MAP_WIDTH]);
     void Update(int map[MAP_HEIGHT][MAP_WIDTH],

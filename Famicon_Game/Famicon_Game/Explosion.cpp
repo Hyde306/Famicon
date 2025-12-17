@@ -31,7 +31,7 @@ void CreateExplosion(
 
     explosions[bombY][bombX].active = true;
     explosions[bombY][bombX].direction = 0; // 中心
-    explosions[bombY][bombX].timer = 15;
+    explosions[bombY][bombX].timer = 7;
 
     map[bombY][bombX] = 0;
 
@@ -50,7 +50,7 @@ void CreateExplosion(
 
             explosions[ny][nx].active = true;
             explosions[ny][nx].direction = dir + 1;
-            explosions[ny][nx].timer = 15;
+            explosions[ny][nx].timer = 6;
 
             if (map[ny][nx] == 2)
             {
@@ -66,7 +66,7 @@ void CreateExplosion(
                         breakEffects[i].y = ny * TILE_SIZE;
                         breakEffects[i].currentFrame = 0;
                         breakEffects[i].frameTimer = 0;
-                        breakEffects[i].timer = 5;
+                        breakEffects[i].timer = 7;
                         break;
                     }
                 }

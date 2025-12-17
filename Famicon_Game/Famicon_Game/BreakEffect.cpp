@@ -4,7 +4,7 @@
 
 static const int BREAK_FRAME_W = 96; 
 static const int BREAK_FRAME_H = 96;
-static const int BREAK_FRAME_COUNT = 8;
+static const int BREAK_FRAME_COUNT = 7;
 
 // 壊れエフェクトの更新処理
 void UpdateBreakEffects(BreakEffect effects[16])
