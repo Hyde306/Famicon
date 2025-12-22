@@ -92,6 +92,12 @@
     <ClInclude Include="TitleScene.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
     </ClInclude>
+    <ClInclude Include="ChaseEnemy.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3D_function.cpp">
@@ -131,6 +137,9 @@
       <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="astar.cpp">
+      <Filter>ソース ファイル\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ChaseEnemy.cpp">
       <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
   </ItemGroup>
