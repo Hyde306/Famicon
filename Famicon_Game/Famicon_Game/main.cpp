@@ -3,7 +3,7 @@
 #include "TitleScene.h"
 #include "config.h" 
 
-constexpr auto FPS = 60;
+constexpr auto FPS = 30;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

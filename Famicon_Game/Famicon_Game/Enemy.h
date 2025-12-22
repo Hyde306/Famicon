@@ -5,8 +5,8 @@
 #include "Bomb.h"
 #include "config.h"
 
-#define ENEMY_FRAMES 6
-#define ENEMY_DEATH_FRAMES 4
+constexpr int NORMAL_FRAME_COUNT = 6;
+constexpr int DEAD_FRAME_COUNT = 5;
 
 extern int enemyImg;
 
@@ -21,6 +21,7 @@ public:
     bool dying;        // 死亡アニメ中か
     int  deathFrame;   // 死亡アニメのコマ
     int  deathTimer;   // フレーム管理
+    bool isDeadFinished;// 死亡後削除
 
     void Init(int map[MAP_HEIGHT][MAP_WIDTH]);
     void Update(int map[MAP_HEIGHT][MAP_WIDTH],
@@ -35,6 +36,7 @@ public:
 private:
     int dirY;
     float prevCenterY;
+    static const int DEAD_COUNT = 5;  
 };
 
 // 管理系

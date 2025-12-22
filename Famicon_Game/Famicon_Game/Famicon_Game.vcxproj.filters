@@ -24,7 +24,7 @@
     <Filter Include="ソース ファイル\ヘッダー ファイル\オブジェクト">
       <UniqueIdentifier>{9472430c-2416-4a8f-82ea-7ee1147279b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\ヘッダー ファイル\シーン">
+    <Filter Include="ソース ファイル\ヘッダー ファイル\オブジェクト\シーン">
       <UniqueIdentifier>{6a32f91b-06f7-4bc9-9c6f-9c1de65fd0a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -33,7 +33,7 @@
       <Filter>ソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\シーン</Filter>
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
     </ClInclude>
     <ClInclude Include="objBase.h">
       <Filter>ライブラリ用ヘッダーファイル</Filter>
@@ -66,7 +66,7 @@
       <Filter>ソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="config.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\シーン</Filter>
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
@@ -90,7 +90,7 @@
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\シーン</Filter>
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
