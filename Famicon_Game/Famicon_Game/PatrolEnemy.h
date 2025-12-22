@@ -1,16 +1,10 @@
 #pragma once
-#include "ObjBase.h"
+#include "BaseEnemy.h"
 #include "Player.h"
 #include "Explosion.h"
-#include "Bomb.h"
 #include "config.h"
-#include"BaseEnemy.h"
 
-
-
-extern int enemyImg;
-
-class ChaseEnemy : public BaseEnemy
+class PatrolEnemy : public BaseEnemy
 {
 public:
     Position pos;
@@ -22,20 +16,19 @@ public:
     int  deathFrame = 0;
     int  deathTimer = 0;
     bool isDeadFinished = false;
-    bool IsDead() const override;
 
-    void Init(int map[MAP_HEIGHT][MAP_WIDTH]);
+    void Init(int map[MAP_HEIGHT][MAP_WIDTH]) override;
     void Update(int map[MAP_HEIGHT][MAP_WIDTH],
         Player& player,
-        Explosion explosions[MAP_HEIGHT][MAP_WIDTH]);
-
+        Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) override;
     void Draw() override;
     void Draw(float scrollX);
 
     int Action(std::list<std::unique_ptr<Base>>&) override;
+    bool IsDead() const override;
 
 private:
-    int dirY = 1;
-    float prevCenterY = 0.0f;
+    int dirX = 1;
+    float prevCenterX = 0.0f;
     static const int DEAD_COUNT = 5;
 };

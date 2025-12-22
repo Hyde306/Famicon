@@ -214,6 +214,17 @@ void Player::Draw(float scrollX)
     DrawRectGraph(x, y, srcX, srcY, FRAME_WIDTH, FRAME_HEIGHT, image, TRUE);
 }
 
+void Player::Kill()
+{
+    if (!isDead)
+    {
+        isDead = true;
+        deadFrame = 0;
+        deadTimer = 0;
+        vec = { 0,0 };
+    }
+}
+
 int Player::Action(std::list<std::unique_ptr<Base>>&)
 {
     return 0;

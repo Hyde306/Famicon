@@ -4,12 +4,15 @@
 #include "Explosion.h"
 #include "config.h"
 
+constexpr int NORMAL_FRAME_COUNT = 6;
+constexpr int DEAD_FRAME_COUNT = 5;
+
 class BaseEnemy : public Base
 {
 public:
     virtual void Init(int map[MAP_HEIGHT][MAP_WIDTH]) = 0;
     virtual void Update(int map[MAP_HEIGHT][MAP_WIDTH],
-        const Player& player,
+        Player& player,
         Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) = 0;
     virtual void Draw(float scrollX) = 0;
     virtual bool IsDead() const = 0;

@@ -27,6 +27,12 @@
     <Filter Include="ソース ファイル\ヘッダー ファイル\オブジェクト\シーン">
       <UniqueIdentifier>{6a32f91b-06f7-4bc9-9c6f-9c1de65fd0a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\敵用">
+      <UniqueIdentifier>{48584ffe-8366-43c4-a0a0-ff6670ed8101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ヘッダー ファイル\敵用">
+      <UniqueIdentifier>{18f773f7-e1cd-44be-9b07-315dc9d1b76e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -80,9 +86,6 @@
     <ClInclude Include="BreakEffect.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="astar.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
     </ClInclude>
@@ -92,11 +95,17 @@
     <ClInclude Include="TitleScene.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\敵用</Filter>
+    </ClInclude>
     <ClInclude Include="ChaseEnemy.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
+      <Filter>ソース ファイル\ヘッダー ファイル\敵用</Filter>
+    </ClInclude>
+    <ClInclude Include="PatrolEnemy.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\敵用</Filter>
     </ClInclude>
     <ClInclude Include="BaseEnemy.h">
-      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト</Filter>
+      <Filter>ソース ファイル\ヘッダー ファイル\敵用</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,14 +142,17 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル\シーン</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="astar.cpp">
       <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\敵用</Filter>
+    </ClCompile>
     <ClCompile Include="ChaseEnemy.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
+      <Filter>ソース ファイル\敵用</Filter>
+    </ClCompile>
+    <ClCompile Include="PatrolEnemy.cpp">
+      <Filter>ソース ファイル\敵用</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

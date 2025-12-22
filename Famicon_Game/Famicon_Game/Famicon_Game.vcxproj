@@ -172,6 +172,7 @@
     <ClInclude Include="objBase.h" />
     <ClInclude Include="objChar.h" />
     <ClInclude Include="objID.h" />
+    <ClInclude Include="PatrolEnemy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene_Base.h" />
     <ClInclude Include="Scene_Manager.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="library_function.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PatrolEnemy.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
