@@ -13,7 +13,6 @@ extern Bomb bomb;
 int enemyImg;
 static std::vector<std::unique_ptr<BaseEnemy>> enemies;
 
-
 // 敵画像初期化
 void InitEnemyGraphics()
 {
@@ -32,10 +31,7 @@ void InitEnemies(int map[MAP_HEIGHT][MAP_WIDTH])
     enemies.back()->Init(map);
 }
 
-
-void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],
-    Player& player,
-    Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
+void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 {
     for (auto& e : enemies) e->Update(map, player, explosions);
 }

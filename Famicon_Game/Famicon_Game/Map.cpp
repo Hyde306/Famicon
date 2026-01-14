@@ -25,7 +25,8 @@ static int floorImage;
 static int softBlockImage;
 
 // ‰æ‘œ“Ç‚İ‚İ
-void InitMapGraphics() {
+void InitMapGraphics()
+{
     floorImage = LoadGraph("image/Ground.png");
     wallImage = LoadGraph("image/Block.png");
     softBlockImage = LoadGraph("image/Break.png");

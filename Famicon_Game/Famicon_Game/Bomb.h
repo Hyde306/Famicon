@@ -6,7 +6,6 @@
 class Bomb
 {
 public:
-   
     int mapX = 0;
     int mapY = 0;
     int worldX = 0;

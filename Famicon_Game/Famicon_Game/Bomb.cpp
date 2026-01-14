@@ -14,7 +14,7 @@ void Bomb::UpdateAnimation()
     frameTimer++;
 
     // アニメーション切り替え速度
-    const int frameChange = 8;
+    const int frameChange = 5;
 
     if (frameTimer >= frameChange)
     {

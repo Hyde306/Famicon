@@ -16,7 +16,7 @@ void UpdateBreakEffects(BreakEffect effects[16])
         effects[i].frameTimer++;
 
         // 3フレームごとにアニメーションを進める
-        if (effects[i].frameTimer >= 3) 
+        if (effects[i].frameTimer >= 2) 
         {
             effects[i].frameTimer = 0;
             effects[i].currentFrame++;

@@ -37,8 +37,7 @@ void Player::Init()
 }
 
 // プレイヤー更新
-void Player::Update(int map[MAP_HEIGHT][MAP_WIDTH],
-    Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
+void Player::Update(int map[MAP_HEIGHT][MAP_WIDTH],Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 {
     centerX = pos.x + TILE_SIZE / 2;
     centerY = pos.y + TILE_SIZE / 2;

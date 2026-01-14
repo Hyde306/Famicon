@@ -4,9 +4,7 @@
 #include "Explosion.h"
 #include "Bomb.h"
 #include "config.h"
-#include"BaseEnemy.h"
-
-
+#include "Enemy.h"
 
 extern int enemyImg;
 
@@ -25,9 +23,7 @@ public:
     bool IsDead() const override;
 
     void Init(int map[MAP_HEIGHT][MAP_WIDTH]);
-    void Update(int map[MAP_HEIGHT][MAP_WIDTH],
-        Player& player,
-        Explosion explosions[MAP_HEIGHT][MAP_WIDTH]);
+    void Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH]);
 
     void Draw() override;
     void Draw(float scrollX);

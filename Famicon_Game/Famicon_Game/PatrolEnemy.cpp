@@ -26,9 +26,7 @@ void PatrolEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
     prevCenterX = pos.x + TILE_SIZE / 2.0f;
 }
 
-void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
-    Player& player,
-    Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
+void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 {
     if (isDeadFinished) return;
 
@@ -94,6 +92,7 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
         if (currentFrame >= NORMAL_FRAME_COUNT)
             currentFrame = 0;
     }
+
     // プレイヤーとの接触判定
     {
         float px = player.GetCenterX();
@@ -102,8 +101,7 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
         float ey = pos.y + TILE_SIZE / 2.0f;
 
         // 簡易AABB判定（Bomberman系ならこれで十分）
-        if (fabs(px - ex) < TILE_SIZE * 0.5f &&
-            fabs(py - ey) < TILE_SIZE * 0.5f)
+        if (fabs(px - ex) < TILE_SIZE * 0.5f && fabs(py - ey) < TILE_SIZE * 0.5f)
         {
             // プレイヤー死亡
             player.Kill();
@@ -111,8 +109,6 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
             return;
         }
     }
-
-
 }
 
 void PatrolEnemy::Draw(float scrollX)

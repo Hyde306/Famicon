@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseEnemy.h"
+#include "Enemy.h"
 #include "Player.h"
 #include "Explosion.h"
 #include "config.h"
@@ -18,9 +18,7 @@ public:
     bool isDeadFinished = false;
 
     void Init(int map[MAP_HEIGHT][MAP_WIDTH]) override;
-    void Update(int map[MAP_HEIGHT][MAP_WIDTH],
-        Player& player,
-        Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) override;
+    void Update(int map[MAP_HEIGHT][MAP_WIDTH], Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH]) override;
     void Draw() override;
     void Draw(float scrollX);
 

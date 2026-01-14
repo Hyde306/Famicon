@@ -20,11 +20,7 @@ void InitExplosions(Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 }
 
 // 爆発を生成
-void CreateExplosion(
-    Explosion explosions[MAP_HEIGHT][MAP_WIDTH],
-    int map[MAP_HEIGHT][MAP_WIDTH],
-    BreakEffect breakEffects[16],
-    int bombX, int bombY, int power)
+void CreateExplosion(Explosion explosions[MAP_HEIGHT][MAP_WIDTH],int map[MAP_HEIGHT][MAP_WIDTH],BreakEffect breakEffects[16],int bombX, int bombY, int power)
 {
     const int dx[4] = { 0, 0, -1, 1 };
     const int dy[4] = { -1, 1, 0, 0 };
@@ -95,7 +91,9 @@ void UpdateExplosion(Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
             }
 
             if (explosions[y][x].timer <= 0)
+            {
                 explosions[y][x].active = false;
+            }
         }
     }
 }
