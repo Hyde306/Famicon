@@ -12,6 +12,8 @@ extern Bomb bomb;
 
 int enemyImg;
 static std::vector<std::unique_ptr<BaseEnemy>> enemies;
+int globalEnemyFrame = 0;
+static int enemyAnimTimer = 0;
 
 // 敵画像初期化
 void InitEnemyGraphics()
@@ -29,6 +31,10 @@ void InitEnemies(int map[MAP_HEIGHT][MAP_WIDTH])
 
     enemies.push_back(std::make_unique<PatrolEnemy>());
     enemies.back()->Init(map);
+
+    globalEnemyFrame = 0;
+    enemyAnimTimer = 0;
+
 }
 
 void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
@@ -36,7 +42,28 @@ void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explo
     for (auto& e : enemies) e->Update(map, player, explosions);
 }
 
+void UpdateEnemyAnimation()
+{ 
+    enemyAnimTimer++;
+
+    if (enemyAnimTimer >= 6) // 通常時アニメーションフレーム
+    {
+        enemyAnimTimer = 0;
+        globalEnemyFrame = (globalEnemyFrame + 1) % NORMAL_FRAME_COUNT;
+    }
+}
+
 void DrawEnemies(float scrollX)
 {
     for (auto& e : enemies) e->Draw(scrollX);
+}
+
+bool AllEnemiesDead()
+{
+    for (auto& e : enemies)
+    {
+        if (!e->IsDead())
+            return false;
+    }
+    return true;
 }

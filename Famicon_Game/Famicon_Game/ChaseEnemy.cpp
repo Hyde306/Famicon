@@ -10,7 +10,7 @@ void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
     pos.x = TILE_SIZE * 5.0f;
     pos.y = TILE_SIZE * 5.0f;
 
-    vec.y = TILE_SIZE / 10.0f;  // ← 修正ポイント
+    vec.y = TILE_SIZE / 10.0f; 
     dirY = 1;
 
     alive = true;
@@ -18,7 +18,6 @@ void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
     isDeadFinished = false;
 
     currentFrame = 0;
-    frameTimer = 0;
 
     deathFrame = 0;
     deathTimer = 0;
@@ -87,13 +86,8 @@ void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
         return;
     }
 
-    frameTimer++;
-    if (frameTimer % 10 == 0)
-    {
-        currentFrame++;
-        if (currentFrame >= NORMAL_FRAME_COUNT)
-            currentFrame = 0;
-    }
+    currentFrame = globalEnemyFrame;
+
 
     // プレイヤーとの接触判定
     {

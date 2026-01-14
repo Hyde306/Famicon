@@ -63,6 +63,7 @@ int CGame::Update()
 
     UpdateExplosion(explosions);
     UpdateBreakEffects(breakEffects);
+    UpdateEnemyAnimation();
     UpdateEnemies(map, player, explosions);
     return 0;
 }

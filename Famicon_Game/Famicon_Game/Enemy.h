@@ -8,6 +8,8 @@
 constexpr int NORMAL_FRAME_COUNT = 6;
 constexpr int DEAD_FRAME_COUNT = 5;
 
+extern int globalEnemyFrame;
+
 class BaseEnemy : public Base
 {
 public:
@@ -16,10 +18,15 @@ public:
     virtual void Draw(float scrollX) = 0;
     virtual bool IsDead() const = 0;
 
-    void Draw() override { Draw(0.0f); }
+    void Draw() override
+    {
+        Draw(0.0f);
+    }
 };
 
 void InitEnemyGraphics();
 void InitEnemies(int map[MAP_HEIGHT][MAP_WIDTH]);
 void UpdateEnemies(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH]);
 void DrawEnemies(float scrollX);
+void UpdateEnemyAnimation();
+bool AllEnemiesDead();

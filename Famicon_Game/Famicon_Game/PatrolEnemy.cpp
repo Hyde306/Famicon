@@ -1,6 +1,7 @@
 #include "PatrolEnemy.h"
 #include "DxLib.h"
 #include "Bomb.h"
+#include "Enemy.h"
 
 extern Bomb bomb;
 extern int enemyImg;
@@ -17,7 +18,6 @@ void PatrolEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
     dying = false;
     isDeadFinished = false;
 
-    currentFrame = 0;
     frameTimer = 0;
 
     deathFrame = 0;
@@ -85,13 +85,8 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion
         return;
     }
 
-    frameTimer++;
-    if (frameTimer % 10 == 0)
-    {
-        currentFrame++;
-        if (currentFrame >= NORMAL_FRAME_COUNT)
-            currentFrame = 0;
-    }
+    currentFrame = globalEnemyFrame;
+
 
     // プレイヤーとの接触判定
     {
@@ -100,7 +95,6 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion
         float ex = pos.x + TILE_SIZE / 2.0f;
         float ey = pos.y + TILE_SIZE / 2.0f;
 
-        // 簡易AABB判定（Bomberman系ならこれで十分）
         if (fabs(px - ex) < TILE_SIZE * 0.5f && fabs(py - ey) < TILE_SIZE * 0.5f)
         {
             // プレイヤー死亡
