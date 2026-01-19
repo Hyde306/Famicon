@@ -4,7 +4,7 @@
 #include "Enemy.h"
 
 extern Bomb bomb;
-extern int enemyImg;
+extern int enemyImg1;
 
 void PatrolEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
 {
@@ -127,7 +127,7 @@ void PatrolEnemy::Draw(float scrollX)
         x, y,
         srcX, srcY,
         frameWidth, frameHeight,
-        enemyImg,
+        enemyImg1,
         TRUE
     );
 }

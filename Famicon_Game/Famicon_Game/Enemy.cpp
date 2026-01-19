@@ -11,7 +11,9 @@
 
 extern Bomb bomb;
 
-int enemyImg;
+int enemyImg1;
+int enemyImg2;
+
 static std::vector<std::unique_ptr<BaseEnemy>> enemies;
 int globalEnemyFrame = 0;
 static int enemyAnimTimer = 0;
@@ -19,7 +21,8 @@ static int enemyAnimTimer = 0;
 // 敵画像初期化
 void InitEnemyGraphics()
 {
-    enemyImg = LoadGraph("image/Enemy1.png");
+    enemyImg1= LoadGraph("image/Enemy1.png");
+    enemyImg2= LoadGraph("image/Onill.png");
 }
 
 // 敵生成

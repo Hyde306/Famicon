@@ -6,7 +6,7 @@
 #include "config.h"
 #include "Enemy.h"
 
-extern int enemyImg;
+extern int enemyImg1;
 
 class ChaseEnemy : public BaseEnemy
 {

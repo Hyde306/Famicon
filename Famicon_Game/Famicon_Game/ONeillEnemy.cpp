@@ -4,7 +4,7 @@
 #include "astar.h"
 
 extern Bomb bomb;
-extern int enemyImg;
+extern int enemyImg2;
 extern int globalEnemyFrame;
 
 void ONeillEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
@@ -156,7 +156,7 @@ void ONeillEnemy::Draw(float scrollX)
     int srcX = dying ? (NORMAL_FRAME_COUNT + deathFrame) * frameWidth
         : currentFrame * frameWidth;
 
-    DrawRectGraph(x, y, srcX, 0, frameWidth, 64, enemyImg, TRUE);
+    DrawRectGraph(x, y, srcX, 0, frameWidth, 64, enemyImg2, TRUE);
 }
 
 void ONeillEnemy::Draw()

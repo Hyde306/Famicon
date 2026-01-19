@@ -3,7 +3,7 @@
 #include "Bomb.h"
 
 extern Bomb bomb;
-extern int enemyImg;
+extern int enemyImg1;
 
 void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
 {
@@ -131,7 +131,7 @@ void ChaseEnemy::Draw(float scrollX)
         x, y,
         srcX, srcY,
         frameWidth, frameHeight,
-        enemyImg,
+        enemyImg1,
         TRUE
     );
 }
