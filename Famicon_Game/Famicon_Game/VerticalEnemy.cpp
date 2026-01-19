@@ -1,32 +1,33 @@
-#include "PatrolEnemy.h"
+#include "VerticalEnemy.h"
 #include "DxLib.h"
 #include "Bomb.h"
-#include "Enemy.h"
 
 extern Bomb bomb;
 extern int enemyImg;
 
-void PatrolEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
+void ChaseEnemy::Init(int map[MAP_HEIGHT][MAP_WIDTH])
 {
     pos.x = TILE_SIZE * 5.0f;
-    pos.y = TILE_SIZE * 7.0f;
+    pos.y = TILE_SIZE * 5.0f;
 
-    vec.x = TILE_SIZE / 10.0f;
-    dirX = 1;
+    vec.y = TILE_SIZE / 10.0f; 
+    dirY = 1;
 
     alive = true;
     dying = false;
     isDeadFinished = false;
 
-    frameTimer = 0;
+    currentFrame = 0;
 
     deathFrame = 0;
     deathTimer = 0;
 
-    prevCenterX = pos.x + TILE_SIZE / 2.0f;
+    prevCenterY = pos.y + TILE_SIZE / 2.0f;
 }
 
-void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
+void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
+    Player& player,
+    Explosion explosions[MAP_HEIGHT][MAP_WIDTH])
 {
     if (isDeadFinished) return;
 
@@ -48,34 +49,34 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion
     int mapX = (int)(centerX / TILE_SIZE);
     int mapY = (int)(centerY / TILE_SIZE);
 
-    float tileCenterX = mapX * TILE_SIZE + TILE_SIZE / 2.0f;
+    float tileCenterY = mapY * TILE_SIZE + TILE_SIZE / 2.0f;
 
-    if ((prevCenterX - tileCenterX) * (centerX - tileCenterX) <= 0.0f)
+    if ((prevCenterY - tileCenterY) * (centerY - tileCenterY) <= 0.0f)
     {
-        int nextMapX = mapX + dirX;
+        int nextMapY = mapY + dirY;
 
         bool isWall =
-            (nextMapX < 0 ||
-                nextMapX >= MAP_WIDTH ||
-                map[mapY][nextMapX] == 1 ||
-                map[mapY][nextMapX] == 2);
+            (nextMapY < 0 ||
+                nextMapY >= MAP_HEIGHT ||
+                map[nextMapY][mapX] == 1 ||
+                map[nextMapY][mapX] == 2);
 
         bool isBomb = false;
         if (bomb.active)
         {
-            if (bomb.mapX == nextMapX && bomb.mapY == mapY)
+            if (bomb.mapX == mapX && bomb.mapY == nextMapY)
                 isBomb = true;
         }
 
         if (isWall || isBomb)
-            dirX = -dirX;
+            dirY = -dirY;
 
-        pos.x = tileCenterX - TILE_SIZE / 2.0f;
+        pos.y = tileCenterY - TILE_SIZE / 2.0f;
     }
 
-    prevCenterX = centerX;
+    prevCenterY = centerY;
 
-    pos.x += vec.x * dirX;
+    pos.y += vec.y * dirY;
 
     if (explosions[mapY][mapX].active)
     {
@@ -95,7 +96,9 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion
         float ex = pos.x + TILE_SIZE / 2.0f;
         float ey = pos.y + TILE_SIZE / 2.0f;
 
-        if (fabs(px - ex) < TILE_SIZE * 0.5f && fabs(py - ey) < TILE_SIZE * 0.5f)
+        // 簡易AABB判定（Bomberman系ならこれで十分）
+        if (fabs(px - ex) < TILE_SIZE * 0.5f &&
+            fabs(py - ey) < TILE_SIZE * 0.5f)
         {
             // プレイヤー死亡
             player.Kill();
@@ -103,9 +106,10 @@ void PatrolEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],Player& player,Explosion
             return;
         }
     }
+
 }
 
-void PatrolEnemy::Draw(float scrollX)
+void ChaseEnemy::Draw(float scrollX)
 {
     if (isDeadFinished) return;
 
@@ -131,18 +135,15 @@ void PatrolEnemy::Draw(float scrollX)
         TRUE
     );
 }
-
-void PatrolEnemy::Draw()
+bool ChaseEnemy::IsDead() const
+{
+    return isDeadFinished;
+}
+void ChaseEnemy::Draw()
 {
     Draw(0.0f);
 }
-
-int PatrolEnemy::Action(std::list<std::unique_ptr<Base>>&)
+int ChaseEnemy::Action(std::list<std::unique_ptr<Base>>&)
 {
     return 0;
-}
-
-bool PatrolEnemy::IsDead() const
-{
-    return isDeadFinished;
 }

@@ -98,10 +98,13 @@
     <ClInclude Include="Enemy.h">
       <Filter>ソース ファイル\ヘッダー ファイル\敵h</Filter>
     </ClInclude>
-    <ClInclude Include="ChaseEnemy.h">
+    <ClInclude Include="VerticalEnemy.h">
       <Filter>ソース ファイル\ヘッダー ファイル\敵h</Filter>
     </ClInclude>
-    <ClInclude Include="PatrolEnemy.h">
+    <ClInclude Include="HorizontalEnemy.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\敵h</Filter>
+    </ClInclude>
+    <ClInclude Include="ONeillEnemy.h">
       <Filter>ソース ファイル\ヘッダー ファイル\敵h</Filter>
     </ClInclude>
   </ItemGroup>
@@ -145,14 +148,17 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル\オブジェクト\敵cpp</Filter>
     </ClCompile>
-    <ClCompile Include="ChaseEnemy.cpp">
+    <ClCompile Include="VerticalEnemy.cpp">
       <Filter>ソース ファイル\オブジェクト\敵cpp</Filter>
     </ClCompile>
-    <ClCompile Include="PatrolEnemy.cpp">
+    <ClCompile Include="HorizontalEnemy.cpp">
       <Filter>ソース ファイル\オブジェクト\敵cpp</Filter>
     </ClCompile>
     <ClCompile Include="ClearScene.h">
       <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="ONeillEnemy.cpp">
+      <Filter>ソース ファイル\オブジェクト\敵cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

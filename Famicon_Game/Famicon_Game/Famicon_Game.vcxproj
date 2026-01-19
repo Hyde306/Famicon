@@ -159,7 +159,8 @@
     <ClInclude Include="BreakEffect.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="2D_function.h" />
-    <ClInclude Include="ChaseEnemy.h" />
+    <ClInclude Include="ONeillEnemy.h" />
+    <ClInclude Include="VerticalEnemy.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Explosion.h" />
@@ -171,7 +172,7 @@
     <ClInclude Include="objBase.h" />
     <ClInclude Include="objChar.h" />
     <ClInclude Include="objID.h" />
-    <ClInclude Include="PatrolEnemy.h" />
+    <ClInclude Include="HorizontalEnemy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene_Base.h" />
     <ClInclude Include="Scene_Manager.h" />
@@ -184,7 +185,8 @@
     <ClCompile Include="BreakEffect.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
-    <ClCompile Include="ChaseEnemy.cpp" />
+    <ClCompile Include="ONeillEnemy.cpp" />
+    <ClCompile Include="VerticalEnemy.cpp" />
     <ClCompile Include="ClearScene.h" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
@@ -192,7 +194,7 @@
     <ClCompile Include="library_function.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="PatrolEnemy.cpp" />
+    <ClCompile Include="HorizontalEnemy.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

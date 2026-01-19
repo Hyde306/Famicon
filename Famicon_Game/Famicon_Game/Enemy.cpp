@@ -5,8 +5,9 @@
 #include <vector>
 #include <memory>
 #include <list>
-#include "ChaseEnemy.h"
-#include "PatrolEnemy.h"
+#include "VerticalEnemy.h"
+#include "HorizontalEnemy.h"
+#include "ONeillEnemy.h"
 
 extern Bomb bomb;
 
@@ -30,6 +31,9 @@ void InitEnemies(int map[MAP_HEIGHT][MAP_WIDTH])
     enemies.back()->Init(map);
 
     enemies.push_back(std::make_unique<PatrolEnemy>());
+    enemies.back()->Init(map);
+
+    enemies.push_back(std::make_unique<ONeillEnemy>());
     enemies.back()->Init(map);
 
     globalEnemyFrame = 0;
