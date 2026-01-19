@@ -1,4 +1,5 @@
 #pragma once
+constexpr int TILE_DOOR = 3;
 
 constexpr int TILE_SIZE = 64;
 constexpr int MAP_WIDTH = 31;  // ƒ}ƒbƒv‚Ì‰¡•

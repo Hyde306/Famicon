@@ -151,5 +151,8 @@
     <ClCompile Include="PatrolEnemy.cpp">
       <Filter>ソース ファイル\オブジェクト\敵cpp</Filter>
     </ClCompile>
+    <ClCompile Include="ClearScene.h">
+      <Filter>ソース ファイル\ヘッダー ファイル\オブジェクト\シーン</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

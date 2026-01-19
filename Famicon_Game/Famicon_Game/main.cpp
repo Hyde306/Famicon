@@ -7,6 +7,8 @@ constexpr auto FPS = 60;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+    SetFontSize(64);
+
     ChangeWindowMode(TRUE);
     SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
     SetWaitVSyncFlag(TRUE);

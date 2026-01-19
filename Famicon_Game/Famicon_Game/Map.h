@@ -8,3 +8,5 @@ extern int map[MAP_HEIGHT][MAP_WIDTH];
 void InitMapGraphics();
 // ƒ}ƒbƒv•`‰æŠÖ”
 void DrawMap(float scrollX);
+extern int doorX;
+extern int doorY;

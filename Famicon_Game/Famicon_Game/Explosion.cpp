@@ -1,8 +1,8 @@
-﻿
-#include "Explosion.h"
+﻿#include "Explosion.h"
 #include "config.h"
 #include "DxLib.h"
 #include "BreakEffect.h"
+#include "Map.h"
 
 Explosion explosions[MAP_HEIGHT][MAP_WIDTH];
 
@@ -52,6 +52,12 @@ void CreateExplosion(Explosion explosions[MAP_HEIGHT][MAP_WIDTH],int map[MAP_HEI
             {
                 map[ny][nx] = 0;
 
+                // ★ ドアが隠れていた場所ならドアを出す
+                if (nx == doorX && ny == doorY)
+                {
+                    map[ny][nx] = TILE_DOOR;
+                }
+
                 // 壊れエフェクト生成
                 for (int i = 0; i < 16; i++)
                 {
@@ -68,6 +74,7 @@ void CreateExplosion(Explosion explosions[MAP_HEIGHT][MAP_WIDTH],int map[MAP_HEI
                 }
                 break;
             }
+
         }
     }
 }

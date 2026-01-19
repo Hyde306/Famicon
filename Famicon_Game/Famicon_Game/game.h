@@ -28,5 +28,6 @@ public:
 	void UpdateScroll();//横スクロール
 	void DrawBomb();//ボム描画
 	void DrawExplosionTile(int x, int y, int dir, bool big, float scrollX);
+	void DrawDoor();
 	void Draw();//描画
 };

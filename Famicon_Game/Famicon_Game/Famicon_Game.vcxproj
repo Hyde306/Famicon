@@ -185,6 +185,7 @@
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
     <ClCompile Include="ChaseEnemy.cpp" />
+    <ClCompile Include="ClearScene.h" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="game.cpp" />

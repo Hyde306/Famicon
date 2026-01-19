@@ -9,6 +9,7 @@
 #include "Explosion.h"
 #include "BreakEffect.h"
 #include "Enemy.h"
+#include "ClearScene.h"
 
 Player player;
 Bomb bomb;
@@ -24,6 +25,10 @@ int imgSmallCenter;
 int imgBigCenter;
 int imgSmallStick;
 int imgBigStick;
+int doorImg;
+
+int doorX, doorY;
+
 
 // コンストラクタ
 CGame::CGame(CManager* p) : CScene(p)
@@ -32,10 +37,11 @@ CGame::CGame(CManager* p) : CScene(p)
     player.Init();
     InitExplosions(explosions);
 
+    doorX = 14; doorY = 3;
     // 爆弾初期化
     bomb.active = false;
 
-    // 画像読み込み（ここでまとめてロード）
+    // 画像読み込み
     imgSmallCenter = LoadGraph("image/SmallCenter.png");
     imgBigCenter = LoadGraph("image/BigCenter.png");
     imgSmallStick = LoadGraph("image/SmallStick.png");
@@ -44,6 +50,8 @@ CGame::CGame(CManager* p) : CScene(p)
     bombImg = LoadGraph("image/Bomb.png");
     breakImg = LoadGraph("image/Break.png");
     breakeffect = LoadGraph("image/breakImg.png");
+
+    doorImg = LoadGraph("image/door.png");   // ★ 追加
 
     InitEnemyGraphics();
     InitEnemies(map);
@@ -65,6 +73,19 @@ int CGame::Update()
     UpdateBreakEffects(breakEffects);
     UpdateEnemyAnimation();
     UpdateEnemies(map, player, explosions);
+
+    if (AllEnemiesDead())
+    {
+        int px = player.GetMapX();
+        int py = player.GetMapY();
+
+        if (px == doorX && py == doorY)
+        {
+            manager->ChangeScene(new CClearScene(manager));
+            return 0;
+        }
+    }
+
     return 0;
 }
 
@@ -139,6 +160,18 @@ void CGame::DrawExplosionTile(int x, int y, int dir, bool big, float scrollX)
     );
 }
 
+void CGame::DrawDoor()
+{
+    int x = doorX * TILE_SIZE - scrollX;
+    int y = doorY * TILE_SIZE;
+
+    DrawExtendGraph(
+        x, y,
+        x + TILE_SIZE, y + TILE_SIZE,
+        doorImg, TRUE
+    );
+}
+
 void CGame::Draw()
 {
     ClearDrawScreen();
@@ -149,8 +182,13 @@ void CGame::Draw()
         imgSmallStick, imgBigStick);
     DrawBreakEffects(breakEffects, scrollX, breakeffect);
     player.Draw(scrollX);
-
     DrawEnemies(scrollX);
+
+    if (map[doorY][doorX] != 2)  
+    {
+        DrawDoor();
+    }
+
     ScreenFlip();
 }
 
