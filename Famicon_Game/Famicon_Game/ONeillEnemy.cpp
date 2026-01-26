@@ -60,23 +60,17 @@ void ONeillEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH], Player& player, Explosi
     {
         thinkTimer = 0;
 
-        //  A* 用マップを作成（ボムを壁扱い）
+        //  A* 用マップを作成
         int astarMap[MAP_HEIGHT][MAP_WIDTH];
         memcpy(astarMap, map, sizeof(astarMap));
 
         if (bomb.active)
         {
-            astarMap[bomb.mapY][bomb.mapX] = 1; // ボムを壁扱い
+            astarMap[bomb.mapY][bomb.mapX] = 1;
         }
 
         //  A* に astarMap を渡す
-        list<Cell> route = ROUTE_CALCULATION(
-            MAP_WIDTH,
-            MAP_HEIGHT,
-            Cell(ex, ey),
-            Cell(px, py),
-            &astarMap[0][0]   // ← 修正
-        );
+        list<Cell> route = ROUTE_CALCULATION(MAP_WIDTH,MAP_HEIGHT,Cell(ex, ey),Cell(px, py),&astarMap[0][0]);
 
         if (route.size() >= 2)
         {
@@ -99,15 +93,11 @@ void ONeillEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH], Player& player, Explosi
         }
     }
 
-
     int nextX = ex + dirX;
     int nextY = ey + dirY;
 
-    bool blocked =
-        nextX < 0 || nextX >= MAP_WIDTH ||
-        nextY < 0 || nextY >= MAP_HEIGHT ||
-        map[nextY][nextX] == 1 ||
-        map[nextY][nextX] == 2 ||
+    bool blocked = nextX < 0 || nextX >= MAP_WIDTH || nextY < 0 || nextY >= MAP_HEIGHT || 
+        map[nextY][nextX] == 1 ||map[nextY][nextX] == 2 || 
         (bomb.active && bomb.mapX == nextX && bomb.mapY == nextY);
 
     if (!blocked)
@@ -153,8 +143,7 @@ void ONeillEnemy::Draw(float scrollX)
 
     int frameWidth = 64;
 
-    int srcX = dying ? (NORMAL_FRAME_COUNT + deathFrame) * frameWidth
-        : currentFrame * frameWidth;
+    int srcX = dying ? (NORMAL_FRAME_COUNT + deathFrame) * frameWidth : currentFrame * frameWidth;
 
     DrawRectGraph(x, y, srcX, 0, frameWidth, 64, enemyImg2, TRUE);
 }
@@ -163,7 +152,6 @@ void ONeillEnemy::Draw()
 {
     Draw(0.0f);
 }
-
 bool ONeillEnemy::IsDead() const
 {
     return isDeadFinished;

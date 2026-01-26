@@ -88,7 +88,6 @@ void ChaseEnemy::Update(int map[MAP_HEIGHT][MAP_WIDTH],
 
     currentFrame = globalEnemyFrame;
 
-
     // ƒvƒŒƒCƒ„[‚Æ‚ÌÚG”»’è
     {
         float px = player.GetCenterX();
